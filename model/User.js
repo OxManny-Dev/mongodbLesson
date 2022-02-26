@@ -1,5 +1,5 @@
-const { Schema, model } = require('mongoose');
-const { isEmail } = require('validator');
+const {Schema, model} = require('mongoose');
+const {isEmail} = require('validator');
 // The Schema is very similar to the "class" that we were creating in Sequelize
 const userSchema = new Schema({
 	// username: String,
@@ -22,12 +22,12 @@ const userSchema = new Schema({
 		lowercase: true,
 		validate: {
 			// actual value for email that the user is providing
-			validator: function(value) {
+			validator: function (value) {
 				return isEmail(value);
 			},
 			// userObject is the whole object that the user is trying to save
 // { username: 'manny', email: 'm@m.com', role: 'Employee', powerLevel: 9001 },
-			message: function(userObject) {
+			message: function (userObject) {
 				return `${userObject.email} is not a valid email address`;
 			},
 		}
@@ -44,6 +44,20 @@ const userSchema = new Schema({
 		max: 10000000,
 		default: 1
 	},
+//	 hobbies
+	hobbies: [String],
+	twoFavoriteCryptos: {
+		firstFavorite: {
+			type: String,
+			uppercase: true,
+			trim: true,
+		},
+		secondFavorite: {
+			type: String,
+			uppercase: true,
+			trim: true,
+		},
+	}
 });
 
 const User = model('User', userSchema);
