@@ -3,9 +3,9 @@ const {model} = require('./todoController');
 
 module.exports = {
 	createTodo: async (req, res) => {
-		const { text } = req.body;
+		const { text, userId } = req.body;
 		try {
-			const newTodo = await Todo.create({text});
+			const newTodo = await Todo.create({ text, userId });
 			res.json(newTodo);
 		} catch (e) {
 			res.json(e);
@@ -13,7 +13,10 @@ module.exports = {
 	},
 	getTodos: async (req, res) => {
 		try {
-			const todos = await Todo.find();
+			const todos = await Todo.find().populate({
+				path: 'userId',
+				select: '-role -powerLevel -email -hobbies'
+			});
 			res.json(todos);
 		} catch (e) {
 			res.json(e);
