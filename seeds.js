@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { faker } = require('@faker-js/faker');
 const {
+	Blog,
 	User,
 	Todo
 } = require('./model');
@@ -94,9 +95,69 @@ const seedDb = async () => {
 
 	const todos = await Todo.insertMany(todosToCreate);
 
-	console.log(todos);
+
+	const blogsToCreate = [
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},		{
+			description: faker.lorem.paragraph(),
+			userId: users[Math.floor(Math.random() * users.length)]._id,
+		},
+	];
+
+	const blogs = await Blog.insertMany(blogsToCreate);
+
+	console.log(blogs);
+
+	// console.log(todos);
 
 	process.exit(0);
 };
 
 seedDb();
+/*
+	Create a Blog model
+	a blog model will belong to a user
+  a blog model will have a description which is a text
+	Seed your database with at least 5 blogs that all belong to a user
+  Create an API GET endpoint that gets all of the blogs from the database with the userId populated
+* */
