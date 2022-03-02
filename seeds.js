@@ -15,22 +15,22 @@ const seedDb = async () => {
 		{
 			username: faker.company.companyName(),
 			email: faker.internet.email(),
-			role: 'Employee',
+			role: 'Admin',
 		},
 		{
 			username: faker.company.companyName(),
 			email: faker.internet.email(),
-			role: 'Employee',
+			role: 'Admin',
 		},
 		{
 			username: faker.company.companyName(),
 			email: faker.internet.email(),
-			role: 'Employee',
+			role: 'Admin',
 		},
 		{
 			username: faker.company.companyName(),
 			email: faker.internet.email(),
-			role: 'Employee',
+			role: 'Admin',
 		},
 		{
 			username: faker.company.companyName(),
@@ -146,9 +146,10 @@ const seedDb = async () => {
 
 	const blogs = await Blog.insertMany(blogsToCreate);
 
-	console.log(blogs);
 
-	// console.log(todos);
+	const employees = await User.findByRole('Employee');
+
+	employees.forEach(employee => employee.greeting());
 
 	process.exit(0);
 };
